@@ -1,3 +1,3 @@
 public class displayLevelBox{
- public void displayLevel(int level){}
+ public void display(int level){ System.out.println("LVL: "+level);}
 }

@@ -1,3 +1,3 @@
 public class displayScoreBox{
- public void displayScoreBox(int score){}
+ public void display(int score){System.out.println("SCORE: "+score);}
 }

@@ -1,6 +1,9 @@
+import java.io.*;
 public class input{
+ private BufferedReader br;
  private String readUserIn;
- public input(){}
- public void readUserIn(){}
- public String giveUserIn(){}
+ public input(){br = new BufferedReader(new InputStreamReader(System.in));}
+ public void readUserIn(){
+  try{readUserIn = br.readLine();} catch(Exception e){}}
+ public String giveUserIn(){String ret = readUserIn; readUserIn = null; return ret; }
 }
