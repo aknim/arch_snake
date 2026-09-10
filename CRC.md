@@ -51,7 +51,7 @@ x (not having cell in CRC) Cell: will be used for snake cell, and food cell both
 ************
 
 * Knows: Its head location, its body location, its direction, its speed, its computed position
-* Does: computes next position when asked, moves in that position when confirmed  as asked
+* Does: computes next position when asked, moves in that position when confirmed  as asked, grows when commanded
 * Collab: None
 */
 

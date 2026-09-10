@@ -14,7 +14,15 @@ public class controller{
  }
  public void start(){
   while(true){
-  disp.display(""+gmClck.getTime(), level, score, gameName, brd.getGridData(), userInstructions);
+  String [][] tmpGrid = brd.getGridData();
+  cell [] tmpCoordArr = snk.getCoordinates(); 
+  for(int i=0;i<tmpCoordArr.length;i++){
+   cell tmpCell = tmpCoordArr[i];
+   tmpGrid[tmpCell.getY()][tmpCell.getX()] = "s";
+  }
+
+  cell tmpFoodCoord = fd.getCoordinates(); tmpGrid[tmpFoodCoord.getY()][tmpFoodCoord.getX()] = "f";
+  disp.display(""+gmClck.getTime(), level, score, gameName, tmpGrid, userInstructions);
   inp.readUserIn();
   String in = inp.giveUserIn();
   String mv = "";
@@ -26,18 +34,20 @@ public class controller{
   }
   cell snakeNextCord = snk.computeNextCoordinate(mv);
   String eaten = "";
-  if (snakeNextCord.equals(fd.getCoordinates())) { eaten = "f";}
+  if (snakeNextCord.equals(fd.getCoordinates())) { System.out.println("being eaten");eaten = "f";}
   if (brd.checkValidCoordinate(snakeNextCord)) {
    snk.moveToComputedCoordinate(eaten);
-   score = score + 1;
-   fd.die();
-   while(true){
-    cell foodNextCord = fd.generateRandomPos(brd.getW(), brd.getH());
-    if (brd.checkValidCoordinate(foodNextCord)){
-     fd.moveToRandom();
-     eaten = "";
-     break;
-    } 
+   if(eaten.equals("f")){
+    score = score + 1;
+    fd.die();
+    while(true){
+     cell foodNextCord = fd.generateRandomPos(brd.getW(), brd.getH());
+     if (brd.checkValidCoordinate(foodNextCord)){
+      fd.moveToRandom();
+      eaten = "";
+      break;
+     } 
+    }
    }
   }
   gmClck.tick();
