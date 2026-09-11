@@ -1,14 +1,14 @@
 public class controller{
  private board brd;
- private input inp;
- private mainDisplay disp;
+ private inputListener inp;
+ private mainDisplayPanel disp;
  private snake snk;
  private food fd;
  private gameClock gmClck;
  private int score, level;
  private String gameName;
  private String userInstructions = "Press 'a' for left, ',' for up, 'o' for down, 'e' for right";
- public controller(board b, input i, mainDisplay d, snake s, food f, gameClock gc, int level, String gameName){
+ public controller(board b, inputListener i, mainDisplayPanel d, snake s, food f, gameClock gc, int level, String gameName){
   this.brd = b; this.inp = i; this.disp = d; this.snk = s; this.fd = f; this.gmClck = gc; this.level = level; this.gameName = gameName;
   score = 0;
  }
@@ -22,19 +22,21 @@ public class controller{
   }
 
   cell tmpFoodCoord = fd.getCoordinates(); tmpGrid[tmpFoodCoord.getY()][tmpFoodCoord.getX()] = "f";
-  disp.display(""+gmClck.getTime(), level, score, gameName, tmpGrid, userInstructions);
-  inp.readUserIn();
+  //disp.display(""+gmClck.getTime(), level, score, gameName, tmpGrid, userInstructions);
+  disp.updateGridFrame(tmpGrid);
+  //inp.readUserIn();
   String in = inp.giveUserIn();
-  String mv = "";
-  switch(in){
+  if(in!=null){
+  String mv = in;//"";
+  /*switch(in){
    case "a": mv = "l"; break;
    case ",": mv = "u"; break;
    case "o": mv = "d"; break;
    case "e": mv = "r"; break;
-  }
+  }*/
   cell snakeNextCord = snk.computeNextCoordinate(mv);
   String eaten = "";
-  if (snakeNextCord.equals(fd.getCoordinates())) { System.out.println("being eaten");eaten = "f";}
+  if (snakeNextCord.equals(fd.getCoordinates())) { eaten = "f";}
   if (brd.checkValidCoordinate(snakeNextCord)) {
    snk.moveToComputedCoordinate(eaten);
    if(eaten.equals("f")){
@@ -49,6 +51,7 @@ public class controller{
      } 
     }
    }
+  }
   }
   gmClck.tick();
  }
