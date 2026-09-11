@@ -54,7 +54,9 @@ public class controller{
      } 
     }
    }
+   if (snk.cellOnBodyOtherThanHead(snakeNextCord)) {System.out.println("Game Over. Snake bit itself"); tmpGrid[snakeNextCord.getY()][snakeNextCord.getX()] = "d"; disp.updateGridFrame(tmpGrid); return;}  
   }
+  else {System.out.println("Game Over! Snake hit the wall"); tmpGrid[snk.getHeadCord().getY()][snk.getHeadCord().getX()] = "d"; disp.updateGridFrame(tmpGrid); return;}
   }
   gmClck.tick();
  }

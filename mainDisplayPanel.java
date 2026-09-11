@@ -55,6 +55,7 @@ public class mainDisplayPanel extends JPanel{
       case "s": c = Color.GREEN; break;
       case "f": c = Color.RED; break;
       case "e": c = Color.WHITE; break;
+      case "d": c = Color.GRAY; break;
      }
      g.setColor(c);
      g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE-1, TILE_SIZE-1); 

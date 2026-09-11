@@ -33,4 +33,14 @@ public class snake{
    default : snakeBody.removeLast();
   }
  }
+ public cell getHeadCord(){
+  return new cell(snakeBody.get(0)); 
+ }
+ public boolean cellOnBodyOtherThanHead(cell c){
+  for(int i=1;i<snakeBody.size();i++){
+   cell snakeCell = snakeBody.get(i);
+   if(snakeCell.equals(c)) return true;
+  }
+  return false; 
+ }
 }
