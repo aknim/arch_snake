@@ -7,6 +7,7 @@ public class controller{
  private gameClock gmClck;
  private int score, level;
  private String gameName;
+ private String lastKnownMove;
  private String userInstructions = "Press 'a' for left, ',' for up, 'o' for down, 'e' for right";
  public controller(board b, inputListener i, mainDisplayPanel d, snake s, food f, gameClock gc, int level, String gameName){
   this.brd = b; this.inp = i; this.disp = d; this.snk = s; this.fd = f; this.gmClck = gc; this.level = level; this.gameName = gameName;
@@ -26,7 +27,9 @@ public class controller{
   disp.updateGridFrame(tmpGrid);
   //inp.readUserIn();
   String in = inp.giveUserIn();
+  if(in==null) in = lastKnownMove;
   if(in!=null){
+  lastKnownMove = in;
   String mv = in;//"";
   /*switch(in){
    case "a": mv = "l"; break;
